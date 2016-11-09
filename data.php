@@ -55,8 +55,16 @@
 		$q = "";
 	}
 	
+	$sort = "id";
+	$order = "ASC";
+	
+	if(isset($_GET["sort"]) && isset($_GET["order"])) {
+		$sort = $_GET["sort"];
+		$order = $_GET["order"];
+	}
+	
 	//otsisõna fn sisse
-	$carData = $Car->get($q);
+	$carData = $Car->get($q, $sort, $order);
 	
 	
 	
@@ -102,10 +110,40 @@
 	
 	$html = "<table>";
 	
+
+	
 	$html .= "<tr>";
-		$html .= "<th>id</th>";
-		$html .= "<th>plate</th>";
-		$html .= "<th>color</th>";
+	
+		$idOrder = "ASC";
+		$arrow = "&darr;";
+		if (isset($_GET["order"]) && $_GET["order"] == "ASC"){
+			$idOrder = "DESC";
+			$arrow = "&uarr;";
+		}
+	
+		$html .= "<th>
+					<a href='?q=".$q."&sort=id&order=".$idOrder."'>
+						id ".$arrow."
+					</a>
+				 </th>";
+				 
+				 
+		$plateOrder = "ASC";
+		$arrow = "&darr;";
+		if (isset($_GET["order"]) && $_GET["order"] == "ASC"){
+			$plateOrder = "DESC";
+			$arrow = "&uarr;";
+		}
+		$html .= "<th>
+					<a href='?q=".$q."&sort=plate&order=".$plateOrder."'>
+						plate
+					</a>
+				 </th>";
+		$html .= "<th>
+					<a href='?q=".$q."&sort=color'>
+						color
+					</a>
+				 </th>";
 	$html .= "</tr>";
 	
 	//iga liikme kohta massiivis
