@@ -47,6 +47,7 @@
 
 	
 ?>
+<?php require("../header.php"); ?>
 <br><br>
 <a href="data.php"> tagasi </a>
 
@@ -66,3 +67,4 @@
  <br>
  <br>
  <a href="?id=<?=$_GET["id"];?>&delete=true">kustuta</a>
+ <?php require("../footer.php"); ?>

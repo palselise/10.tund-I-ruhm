@@ -54,6 +54,7 @@
     $userInterests = $Interest->getUser();
 	
 ?>
+<?php require("../header.php"); ?>
 <h1><a href="data.php"> < tagasi</a> Kasutaja leht</h1>
 <?=$msg;?>
 <p>
@@ -116,3 +117,4 @@
 	<input type="submit" value="Lisa">
 	
 </form>
+<?php require("../footer.php"); ?>
