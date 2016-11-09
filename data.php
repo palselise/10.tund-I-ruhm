@@ -42,7 +42,25 @@
 	}
 	
 	//saan kõik auto andmed
-	$carData = $Car->get();
+	
+	//kas otsib
+	if(isset($_GET["q"])){
+		
+		// kui otsib, võtame otsisõna aadressirealt
+		$q = $_GET["q"];
+		
+	}else{
+		
+		// otsisõna tühi
+		$q = "";
+	}
+	
+	//otsisõna fn sisse
+	$carData = $Car->get($q);
+	
+	
+	
+	
 	//echo "<pre>";
 	//var_dump($carData);
 	//echo "</pre>";
@@ -72,6 +90,14 @@
 </form>
 
 <h2>Autod</h2>
+
+<form>
+	
+	<input type="search" name="q" value="<?=$q;?>">
+	<input type="submit" value="Otsi">
+
+</form>
+
 <?php 
 	
 	$html = "<table>";

@@ -26,13 +26,32 @@ class Car {
 		
 	}
 		
-	function get() {
-
-		$stmt = $this->connection->prepare("
-			SELECT id, plate, color
-			FROM cars_and_colors
-			WHERE deleted IS NULL
-		");
+	function get($q) {
+		
+		//kas otsib
+		if ($q != "") {
+			
+			echo "Otsib: ".$q;
+			
+			$stmt = $this->connection->prepare("
+				SELECT id, plate, color
+				FROM cars_and_colors
+				WHERE deleted IS NULL 
+				AND (plate LIKE ? OR color LIKE ?)
+			");
+			$searchWord = "%".$q."%";
+			$stmt->bind_param("ss", $searchWord, $searchWord);
+			
+		} else {
+			
+			$stmt = $this->connection->prepare("
+				SELECT id, plate, color
+				FROM cars_and_colors
+				WHERE deleted IS NULL
+			");
+			
+		}
+		
 		echo $this->connection->error;
 		
 		$stmt->bind_result($id, $plate, $color);
